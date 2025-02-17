@@ -1,0 +1,422 @@
+{
+	"info": {
+		"_postman_id": "8b2289f7-1475-452e-aa32-06169f9a4644",
+		"name": "Custom Shop Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16759593"
+	},
+	"item": [
+		{
+			"name": "Create product type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Bicycle\",\n  \"config\": {\n    \"customisation\": \"fully_customizable\"\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/product-types",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"product-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add attributes to product type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productTypeID\": \"{{productTypeId}}\", // 3d7fb7fa-82ca-453e-96c1-2c8920a79d04\n  \"attributes\": [\n    {\n      \"attributeName\": \"Frame Type\",\n      \"possibleOptions\": [\"Full-suspension\", \"Diamond\", \"Step-through\"]\n    },\n    {\n      \"attributeName\": \"Frame Finish\",\n      \"possibleOptions\": [\"Matte\", \"Shiny\"]\n    },\n    {\n      \"attributeName\": \"Wheels\",\n      \"possibleOptions\": [\"Road Wheels\", \"Mountain Wheels\", \"Fat Bike Wheels\"]\n    },\n    {\n      \"attributeName\": \"Rim Color\",\n      \"possibleOptions\": [\"Red\", \"Black\", \"Blue\"]\n    },\n    {\n      \"attributeName\": \"Chain\",\n      \"possibleOptions\": [\"Single-speed Chain\", \"8-speed Chain\"]\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/product-types/attributes",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"product-types",
+						"attributes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add not allowed combinations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"productTypeId\": \"{{productTypeId}}\",\n  \"notAllowedCombinations\": [\n    [\n      {\n        \"attributeId\": 6,\n        \"attributeOptionId\": 15 \n      },\n      {\n        \"attributeId\": 8,\n        \"attributeOptionId\": 20 \n      }\n    ],\n    [\n      {\n        \"attributeId\": 6,\n        \"attributeOptionId\": 16\n      },\n      {\n        \"attributeId\": 8,\n        \"attributeOptionId\": 20\n      }\n    ],\n    [\n      {\n        \"attributeId\": 6,\n        \"attributeOptionId\": 15 \n      },\n      {\n        \"attributeId\": 7,\n        \"attributeOptionId\": 18  \n      },\n      {\n        \"attributeId\": 9,\n        \"attributeOptionId\": 22 \n      }\n    ]\n  ]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/product-types/not-allowed-combinations",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"product-types",
+						"not-allowed-combinations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/product-types",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"product-types"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products list - admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/products?page=1&size=20",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product type details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/product-types/{{productTypeId}}",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"product-types",
+						"{{productTypeId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mountain Pro 5000",
+							"type": "text"
+						},
+						{
+							"key": "sku",
+							"value": "BIKE-001",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "A professional-grade mountain bike with enhanced suspension.",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "799.99",
+							"type": "text"
+						},
+						{
+							"key": "productTypeId",
+							"value": "{{productTypeId}}",
+							"type": "text"
+						},
+						{
+							"key": "main_picture",
+							"type": "file",
+							"src": "postman-cloud:///1efaa888-3a22-4310-9cdc-34a1918d7d1a"
+						},
+						{
+							"key": "image_gallery",
+							"type": "file",
+							"src": [
+								"postman-cloud:///1efdd7c1-b92b-4f60-bfd4-3dfc3623cfe5",
+								"postman-cloud:///1efdd7c1-9cd8-4fc0-acee-be704aaf25cb"
+							]
+						},
+						{
+							"key": "attributeOverrides",
+							"value": "{\"deactivatedAttributes\":[{\"attributeId\":10}],\"deactivatedOptions\":[{\"attributeId\":8,\"optionId\":21}],\"outOfStockOptions\":[{\"attributeId\":6,\"optionId\":16}]}",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "notAllowedCombinationsOverrides",
+							"value": "{\"deactivate\":[{\"combinationId\":7}]}",
+							"contentType": "application/json",
+							"type": "text"
+						},
+						{
+							"key": "productNotAllowedCombinations",
+							"value": "[[{\"attributeId\":8,\"attributeOptionId\":19},{\"attributeId\":9,\"attributeOptionId\":22}]]",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/products",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/products/{{productId}}",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"products",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/admin/products/{{productId}}",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"admin",
+						"products",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get compatible combinations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/products/{{productId}}/available-options?requestedAttributeId=6&selectedOptionIds=18,24",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"products",
+						"{{productId}}",
+						"available-options"
+					],
+					"query": [
+						{
+							"key": "requestedAttributeId",
+							"value": "6"
+						},
+						{
+							"key": "selectedOptionIds",
+							"value": "18,24"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get product for customer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/products/{{productId}}",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"products",
+						"{{productId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get products list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/products?page=1&size=10",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add item to cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": \"{{productId}}\",\n    \"selectedOptions\": [\n        {\n            \"attributeId\": 6,\n            \"optionId\": 14\n        },\n        {\n            \"attributeId\": 7,\n            \"optionId\": 18\n        },\n        {\n            \"attributeId\": 9,\n            \"optionId\": 22\n        }\n    ],\n    \"quantity\": 2\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/v1/cart/items",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"cart",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get cart items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/v1/cart/items",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"v1",
+						"cart",
+						"items"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
